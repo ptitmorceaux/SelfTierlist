@@ -149,6 +149,27 @@ Le projet est un outil web permettant de créer, modifier, dupliquer et partager
 | `/image/{hash}` | GET     | Récupère une image                            |
 | `/image/{hash}` | DELETE  | Supprime une image si inutilisée (JWT requis) |
 
+Comportement recommandé pour `POST /upload`:
+
+* Si l'image normalisée (WebP 50x50) n'existe pas encore: créer l'entrée et répondre `201 Created` avec le `hash`.
+* Si l'image existe déjà (même hash): ne rien recréer et répondre `200 OK` avec le même `hash`.
+
+Exemples de réponses:
+
+```json
+{
+  "hash": "a1b2c3d4e5f6...",
+  "created": true
+}
+```
+
+```json
+{
+  "hash": "a1b2c3d4e5f6...",
+  "created": false
+}
+```
+
 ---
 
 ## Items
