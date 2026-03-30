@@ -22,7 +22,7 @@ app = FastAPI(
     redoc_url="/redoc",
     openapi_url="/openapi.json",
 )
-app.state.identifier = "passmanager_api"
+app.state.identifier = "selftierlist_api"
 
 # Middleware CORS
 app.add_middleware(
