@@ -1,3 +1,4 @@
+from fastapi.api.models import tierlist
 import uvicorn
 from datetime import datetime, timezone
 import json
@@ -9,7 +10,7 @@ from core.config import URL_PATH_PREFIX, API_PORT
 
 from db.session import engine, wait_for_db
 from db.base import Base
-from models import user, credential
+from models import user, image, image_tierlist
 
 from routes import user, credential, utils
 
@@ -82,8 +83,8 @@ async def startup_event():
 
 # Routes
 app.include_router(user.router, tags=["User"])
-app.include_router(credential.router, tags=["Credentials"])
-app.include_router(utils.router, tags=["Utils"])
+app.include_router(tierlist.router, tags=["Tierlist"])
+app.include_router(utils.router, tags=["Image"])
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=API_PORT, reload=True)
