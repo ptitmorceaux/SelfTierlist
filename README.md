@@ -88,24 +88,26 @@ Le projet est un outil web permettant de créer, modifier, dupliquer et partager
 ## Images
 
 * Les images sont stockées sur le serveur avec un nom basé sur leur **hash SHA256**, ce qui évite les doublons.
-* Une table `image` contient uniquement `id`, `hash`, et `path`.
+* Endpoint upload: l'API reçoit une image, la convertit/normalise en **WebP 50x50**, puis calcule son hash SHA256 à partir des pixels normalisés.
+* Ce hash devient l'identifiant unique de l'image (ID logique).
+* Une table `image` contient `hash`, `path`, `created_at`.
 * Une table `image_tierlist` gère la relation n↔n entre images et tier lists. Cela permet de savoir si une image est utilisée avant suppression.
 
 ### Exemple tables `image` et `image_tierlist`
 
 ```json
 [
-  {"id": 1, "hash": "a1b2c3d4", "path": "/uploads/a1b2c3d4.webp"},
-  {"id": 2, "hash": "e5f6g7h8", "path": "/uploads/e5f6g7h8.webp"},
-  {"id": 3, "hash": "i9j0k1l2", "path": "/uploads/i9j0k1l2.webp"}
+  {"hash": "a1b2c3d4", "path": "/uploads/a1b2c3d4.webp", "created_at": "2026-03-30T10:00:00Z"},
+  {"hash": "e5f6g7h8", "path": "/uploads/e5f6g7h8.webp", "created_at": "2026-03-30T10:01:00Z"},
+  {"hash": "i9j0k1l2", "path": "/uploads/i9j0k1l2.webp", "created_at": "2026-03-30T10:02:00Z"}
 ]
 ```
 
 ```json
 [
-  {"image_id": 1, "tierlist_id": 12},
-  {"image_id": 2, "tierlist_id": 12},
-  {"image_id": 3, "tierlist_id": 12}
+  {"image_hash": "a1b2c3d4", "tierlist_id": 12},
+  {"image_hash": "e5f6g7h8", "tierlist_id": 12},
+  {"image_hash": "i9j0k1l2", "tierlist_id": 12}
 ]
 ```
 
