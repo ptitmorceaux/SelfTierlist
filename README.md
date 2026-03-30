@@ -6,7 +6,7 @@ Le projet est un outil web permettant de créer, modifier, dupliquer et partager
 
 ## Utilisateurs
 
-* Chaque utilisateur dispose d’un compte unique identifié par `email` et `username`.
+* Chaque utilisateur dispose d’un compte unique identifié avec son `username`.
 * Les mots de passe sont stockés sous forme de hash sécurisé.
 * Les utilisateurs ont un champ `is_admin` boolean (default false) pour permettre des droits administratifs futurs.
 * Les endpoints sensibles (tier lists, images) utilisent JWT pour vérifier l’identité et les droits de l’utilisateur.
@@ -17,7 +17,7 @@ Le projet est un outil web permettant de créer, modifier, dupliquer et partager
 | Colonne    | Type                  | Description                |
 | ---------- | --------------------- | -------------------------- |
 | id         | INT PRIMARY KEY       | Identifiant unique         |
-| email      | VARCHAR UNIQUE        | Email de l’utilisateur     |
+| pseudo     | VARCHAR UNIQUE        | Pseudo de l'utilisateur    |
 | username   | VARCHAR UNIQUE        | Nom d’utilisateur          |
 | password   | CHAR                  | Hash du mot de passe       |
 | is_admin   | BOOLEAN DEFAULT FALSE | Droit d’administrateur     |
