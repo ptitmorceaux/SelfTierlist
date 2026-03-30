@@ -1,0 +1,1 @@
+Le repertoire ./postgres doit exister avant de lancer le container postgres.
