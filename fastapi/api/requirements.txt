@@ -1,0 +1,9 @@
+cryptography
+PyJWT
+python-dotenv
+fastapi
+uvicorn[standard]
+sqlalchemy[asyncio]
+asyncpg
+alembic
+pydantic

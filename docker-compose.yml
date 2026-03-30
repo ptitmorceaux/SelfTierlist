@@ -15,7 +15,7 @@ services:
       - default
   
   fastapi:
-    build: .
+    build: ./fastapi
     image: selftierlist-fastapi:latest
     container_name: selftierlist_fastapi
     restart: unless-stopped
