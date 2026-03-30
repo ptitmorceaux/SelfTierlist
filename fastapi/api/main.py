@@ -1,4 +1,3 @@
-from fastapi.api.models import tierlist
 import uvicorn
 from datetime import datetime, timezone
 import json
@@ -10,9 +9,14 @@ from core.config import URL_PATH_PREFIX, API_PORT
 
 from db.session import engine, wait_for_db
 from db.base import Base
-from models import user, image, image_tierlist
+from models import user as user_model
+from models import tierlist as tierlist_model
+from models import image as image_model
+from models import image_tierlist as image_tierlist_model
 
-from routes import user, credential, utils
+from routes import user as user_routes
+from routes import tierlist as tierlist_routes
+from routes import image as image_routes
 
 app = FastAPI(
     title="Self Tier List API",
@@ -82,9 +86,9 @@ async def startup_event():
         await conn.run_sync(Base.metadata.create_all)
 
 # Routes
-app.include_router(user.router, tags=["User"])
-app.include_router(tierlist.router, tags=["Tierlist"])
-app.include_router(utils.router, tags=["Image"])
+app.include_router(user_routes.router, tags=["User"])
+app.include_router(tierlist_routes.router, tags=["Tierlist"])
+app.include_router(image_routes.router, tags=["Image"])
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=API_PORT, reload=True)
